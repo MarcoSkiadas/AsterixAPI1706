@@ -21,6 +21,16 @@ public List<Character> getAllCharacters() {
 public List<Character> findCharacter(@RequestParam(required = false, defaultValue = "") String name) {
         return characterRepo.findByName(name);
 }
+    @GetMapping("/{profession}byAge")
+    public int averageAgeByProfession(@PathVariable String profession) {
+        List<Character> c = characterRepo.findByProfession(profession);
+        int age = 0;
+        for (Character cc : c) {
+            age += cc.age();
+        }
+        age = age / c.size();
+        return age;
+    }
 
 @PostMapping
     public Character addCharacter(@RequestBody Character character) {

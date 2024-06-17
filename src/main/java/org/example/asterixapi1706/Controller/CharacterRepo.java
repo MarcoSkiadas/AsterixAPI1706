@@ -8,5 +8,6 @@ import java.util.List;
 public interface CharacterRepo extends MongoRepository<Character, String> {
 
     List<Character> findByName(String name);
+    List<Character> findByProfession(String profession);
 
 }
