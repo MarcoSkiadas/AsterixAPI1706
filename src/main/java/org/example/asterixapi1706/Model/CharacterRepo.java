@@ -1,4 +1,4 @@
-package org.example.asterixapi1706.Controller;
+package org.example.asterixapi1706.Model;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CharacterRepo extends MongoRepository<Character, String> {
 
-    List<Character> findByName(String name);
-    List<Character> findByProfession(String profession);
+   public List<Character> findByName(String name);
+   public List<Character> findByProfession(String profession);
 
 }

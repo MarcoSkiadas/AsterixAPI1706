@@ -1,47 +1,56 @@
 package org.example.asterixapi1706.Controller;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.example.asterixapi1706.Model.Character;
+import org.example.asterixapi1706.Model.CharacterDTO;
+import org.example.asterixapi1706.Service.AsterixService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/asterix/characters")
 @RequiredArgsConstructor
 public class AsterixController {
 
-    private final CharacterRepo characterRepo;
+    private final AsterixService service;
 
     @GetMapping
 public List<Character> getAllCharacters() {
-    return characterRepo.findAll();
+    return service.getAllCharacters();
 }
 @GetMapping("/findByName")
-public List<Character> findCharacter(@RequestParam(required = false, defaultValue = "") String name) {
-        return characterRepo.findByName(name);
+public List<Character> findCharacters(@RequestParam(required = false, defaultValue = "") String name) {
+        return service.findCharacter(name);
 }
     @GetMapping("/{profession}byAge")
-    public int averageAgeByProfession(@PathVariable String profession) {
-        List<Character> c = characterRepo.findByProfession(profession);
-        int age = 0;
-        for (Character cc : c) {
-            age += cc.age();
-        }
-        age = age / c.size();
-        return age;
+    public int averageAgeByProfessionC(@PathVariable String profession) {
+        return service.averageAgeByProfession(profession);
     }
 
 @PostMapping
-    public Character addCharacter(@RequestBody Character character) {
-        return characterRepo.save(character);
+    public Character addCharacterC(@RequestBody CharacterDTO character) {
+        return service.addCharacter(character);
 }
 @PutMapping
     public Character updateCharacter(@RequestBody Character character) {
-        return characterRepo.save(character);
+        return service.updateCharacter(character);
 }
 @DeleteMapping()
     public void deleteCharacter(@RequestBody Character character) {
-        characterRepo.delete(character);
+        service.deleteCharacter(character);
 }
+@GetMapping("/fetch")
+    public Character getCharacterById(@RequestParam(required = false, defaultValue = "") String id) {
+    return service.findCharacterById(id);
+}
+    @PutMapping("/id")
+    public Character updateCharacterById(@RequestParam(required = false, defaultValue = "") String id) {
+        return service.updateCharacterById(id);
+    }
+    @DeleteMapping("/id")
+    public void deleteCharacterById(@RequestParam(required = false, defaultValue = "") String id) {
+        service.deleteCharacterById(id);
+    }
 }
