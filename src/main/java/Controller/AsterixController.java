@@ -10,9 +10,8 @@ import java.util.List;
 @RequestMapping("/asterix")
 public class AsterixController {
 
-    @GetMapping("/charcters")
+    @GetMapping("/characters")
 public List<Character> getAllCharacters() {
-
     return List.of(
             new Character("1", "Asterix", 35, "Krieger"),
             new Character("2", "Obelix", 35, "Lieferant"),
