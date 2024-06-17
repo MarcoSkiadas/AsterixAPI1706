@@ -51,17 +51,31 @@ public class AsterixService {
     public void deleteCharacter(Character character) {
         characterRepo.delete(character);
     }
+
     public Character findCharacterById(String id) {
         return characterRepo.findById(id).orElseThrow();
     }
-    public Character updateCharacterById(String id) {
-        Character character = characterRepo.findById(id).orElseThrow();
-        return characterRepo.save(character);
+    public Character updateCharacterById(String id, CharacterDTO characterDTO) {
+        Optional<Character> character = characterRepo.findById(id);
+        if (character.isPresent()) {
+            Character characterC = character.get()
+                    .withName(characterDTO.name())
+                    .withProfession(characterDTO.profession())
+                    .withAge(characterDTO.age());
+            characterRepo.save(characterC);
+            return characterC;
+        } else {
+            return null;
+        }
     }
 
-    public void deleteCharacterById(String id) {
-        Character character = characterRepo.findById(id).orElseThrow();
-        characterRepo.delete(character);
+    public boolean deleteCharacterById(String id) {
+        if (characterRepo.existsById(id)) {
+            characterRepo.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

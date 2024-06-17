@@ -41,16 +41,16 @@ public List<Character> findCharacters(@RequestParam(required = false, defaultVal
     public void deleteCharacter(@RequestBody Character character) {
         service.deleteCharacter(character);
 }
-@GetMapping("/fetch")
-    public Character getCharacterById(@RequestParam(required = false, defaultValue = "") String id) {
+@GetMapping("/{id}")
+    public Character getCharacterById(@PathVariable String id) {
     return service.findCharacterById(id);
 }
-    @PutMapping("/id")
-    public Character updateCharacterById(@RequestParam(required = false, defaultValue = "") String id) {
-        return service.updateCharacterById(id);
+    @PutMapping("/{id}")
+    public Character updateCharacterById(@PathVariable String id, @RequestBody CharacterDTO character) {
+        return service.updateCharacterById(id, character);
     }
-    @DeleteMapping("/id")
-    public void deleteCharacterById(@RequestParam(required = false, defaultValue = "") String id) {
+    @DeleteMapping("/{id}")
+    public void deleteCharacterById(@PathVariable String id) {
         service.deleteCharacterById(id);
     }
 }
