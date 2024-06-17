@@ -2,9 +2,7 @@ package org.example.asterixapi1706.Controller;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,5 +16,22 @@ public class AsterixController {
     @GetMapping
 public List<Character> getAllCharacters() {
     return characterRepo.findAll();
+}
+@GetMapping("/findByName")
+public List<Character> findCharacter(@RequestParam(required = false, defaultValue = "") String name) {
+        return characterRepo.findByName(name);
+}
+
+@PostMapping
+    public Character addCharacter(@RequestBody Character character) {
+        return characterRepo.save(character);
+}
+@PutMapping
+    public Character updateCharacter(@RequestBody Character character) {
+        return characterRepo.save(character);
+}
+@DeleteMapping()
+    public void deleteCharacter(@RequestBody Character character) {
+        characterRepo.delete(character);
 }
 }
