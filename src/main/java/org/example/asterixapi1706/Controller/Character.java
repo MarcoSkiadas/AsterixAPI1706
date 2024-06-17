@@ -1,4 +1,4 @@
-package Controller;
+package org.example.asterixapi1706.Controller;
 
 public record Character(
         String id,

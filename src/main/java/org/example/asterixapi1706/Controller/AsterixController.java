@@ -1,4 +1,4 @@
-package Controller;
+package org.example.asterixapi1706.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/asterix")
+@RequestMapping("/asterix/characters")
 public class AsterixController {
 
-    @GetMapping("/characters")
+    @GetMapping
 public List<Character> getAllCharacters() {
     return List.of(
             new Character("1", "Asterix", 35, "Krieger"),
