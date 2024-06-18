@@ -15,6 +15,8 @@ import java.util.UUID;
 public class AsterixService {
 
     private final CharacterRepo characterRepo;
+    private  final UtilService service;
+
 
 
     public List<Character> getAllCharacters() {
@@ -36,7 +38,7 @@ public class AsterixService {
 
 
     public Character addCharacter(CharacterDTO character) {
-        String id = UUID.randomUUID().toString();
+        String id = service.returnRandomId();
         String name = character.name();
         int age = character.age();
         String profession = character.profession();
