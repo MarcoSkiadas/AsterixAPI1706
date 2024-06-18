@@ -24,7 +24,7 @@ public List<Character> getAllCharacters() {
 public List<Character> findCharacters(@RequestParam(required = false, defaultValue = "") String name) {
         return service.findCharacter(name);
 }
-    @GetMapping("/{profession}byAge")
+    @GetMapping("/{profession}ByAge")
     public int averageAgeByProfessionC(@PathVariable String profession) {
         return service.averageAgeByProfession(profession);
     }
